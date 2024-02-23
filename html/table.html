@@ -7,7 +7,7 @@
     <title>json table</title>
 </head>
 <body>
-	<table>
+	<table id="postTable">
 		<thead>
 			<tr>
 				<th>userId</th>
@@ -20,6 +20,14 @@
 
 		</tbody>
 	</table>
+	<div id="post">
+		<span id="closeBtn" onclick="closePost()">X</span>
+		<input type="text" id="userId">
+		<input type="text" id="id">
+		<input type="text" id="title">
+		<input type="text" id="completed">
+	</div>
+
 	<script src="./../data/data.json"></script>
 	<script src="./../js/table.js"></script>
 </body>
