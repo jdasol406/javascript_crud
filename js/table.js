@@ -1,9 +1,22 @@
 // json 데이터 가져오기
 var data = JSON.parse(JSON.stringify(book));
 
+/* 테이블을 만드는 비우는 함수 */
+function clearTable() {
+  var tableBody = document.getElementById("tableBody");
+
+  // 테이블의 tbody 내부의 자식 요소들을 모두 제거
+  while (tableBody.firstChild) {
+    tableBody.removeChild(tableBody.firstChild);
+  }
+}
+
 /* json파일로 테이블을 만드는 함수 */
 function createTable(data) {
-  console.log("test2");
+  //table을 비우고 새로 만들어야함
+  clearTable();
+  console.log("createTable");
+  console.log(data)
   var tableBody = document.getElementById("tableBody");
 
   data.forEach(function(item) {
@@ -24,6 +37,7 @@ function createTable(data) {
   });
 }
 
+console.log("test");
 createTable(data);
 
 function clearTable() {
@@ -54,7 +68,7 @@ document.getElementById("tableBody").addEventListener("click", function(event) {
 /* 클릭된 tr의 값을 팝업에 표시하는 함수 */
 function showPost(values) {
   // 팝업 보이기
-  document.getElementById("tableBody").style.display = "none";
+  document.getElementById("postTable").style.display = "none";
   document.getElementById("post").style.display = "block";
 
   // 팝업 내용 채우기
@@ -69,22 +83,8 @@ function showPost(values) {
     input.readOnly = true; // 읽기 전용으로 설정
     postContent.appendChild(input);
 
-
-  // 삭제 버튼 생성 및 이벤트 리스너 추가
-  /*
-  var deleteButton = document.createElement("button");
-  deleteButton.innerText = "Delete";
-  deleteButton.className = "deleteButton";
-  deleteButton.addEventListener("click", function() {
-      // 해당 행 제거
-      //var rowToRemove = document.getElementById("Id");
-      //rowToRemove.parentNode.removeChild(rowToRemove);
-
-      // 팝업 닫기
-      closePopup();
-  });
-  popupContent.appendChild(deleteButton);*/
 }
+
 /* post input값 비우기 함수 */
 function clearPost() {
   document.getElementById("userId").value = "";
@@ -93,7 +93,7 @@ function clearPost() {
   document.getElementById("completed").value = "";
 }
 
-// 팝업 닫기 함수
+/* 팝업 닫기 함수 */ 
 function closePost() {
   // 팝업 감추기
   document.getElementById("post").style.display = "none";
@@ -101,5 +101,28 @@ function closePost() {
   // 팝업 내용 초기화
   clearPost();
 
-  document.getElementById("tableBody").style.display = "block";
+  document.getElementById("postTable").style.display = "block";
+
+  //location.reload();
 }
+
+// Delete 버튼이 클릭될 때 실행되는 함수
+function deleteRow() {
+  // id와 일치하는 객체를 찾아서 삭제
+  
+  data = data.filter(function(item) {
+    // id가 "id"인 input 요소의 값을 가져와서 postId 변수에 담기
+    var postId = document.getElementById("id").value;
+
+    // console.log("itemId: ", item.id);
+    // console.log("id", postId);
+    return String(item.id) !== postId;
+
+  });
+
+  closePost();
+  // 테이블 업데이트
+  createTable(data);
+  console.log(data)
+}
+

@@ -8,17 +8,44 @@ td {
   text-align: center;
 }
 
+/* .wrap {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: auto;
+} */
+
 #post {
   display: none;
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 668px;
+  width: 740px;
   background-color: #fff;
   padding: 20px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
   z-index: 9999;
+}
+
+#post input {
+  text-align: center;
+}
+
+#userId{
+  width: 20px;
+}
+
+#id{
+  width: 20px;
+}
+
+#title{
+  width: 475px;
+}
+
+#completed{
+  width: 50px;
 }
 
 #closeBtn {

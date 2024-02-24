@@ -7,6 +7,9 @@
     <title>json table</title>
 </head>
 <body>
+	<div class="wrap">
+
+	
 	<table id="postTable">
 		<thead>
 			<tr>
@@ -26,8 +29,12 @@
 		<input type="text" id="id">
 		<input type="text" id="title">
 		<input type="text" id="completed">
+		<input type="button" value="update">
+		<input type="button" value="delete" onclick="deleteRow()">
 	</div>
 
+
+</div>	
 	<script src="./../data/data.json"></script>
 	<script src="./../js/table.js"></script>
 </body>
