@@ -23,6 +23,7 @@
 
 		</tbody>
 	</table>
+	<input type="button" value="create" id="create-btn" onclick="createBtn()">
 	<div id="post">
 		<span id="closeBtn" onclick="closePost()">X</span>
 		<input type="text" class="postInput" id="userId">
@@ -33,7 +34,14 @@
 		<input type="button" value="update" id="update" onclick="updateRow()">
 		<input type="button" value="delete" id="delete" onclick="deleteRow()">
 	</div>
-
+	<div id="create-post">
+		<span id="closeBtn" onclick="closePost()">X</span>
+		<input type="text" id="create-userId">
+		<input type="text" id="create-id">
+		<input type="text" id="create-title">
+		<input type="text" id="create-completed">
+		<input type="button" value="create" id="create" onclick="createRow()">
+	</div>
 
 </div>	
 	<script src="./../data/data.json"></script>

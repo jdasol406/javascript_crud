@@ -1,11 +1,10 @@
 // json 데이터 가져오기
 var data = JSON.parse(JSON.stringify(book));
 
-/* 테이블을 만드는 비우는 함수 */
+/* 테이블을 비우는 함수 */
 function clearTable() {
   var tableBody = document.getElementById("tableBody");
 
-  // 테이블의 tbody 내부의 HTML을 빈 문자열로 설정하여 모든 자식 요소를 제거
   tableBody.innerHTML = '';
 }
 
@@ -34,12 +33,11 @@ function createTable(data) {
   });
 }
 
-console.log("test");
 createTable(data);
 
-/* tr클릭 함수 */
+/* tr클릭 이벤트 */
 document.getElementById("tableBody").addEventListener("click", function(event) {
-  var targetRow = event.target.closest('tr');
+  var targetRow = event.target.closest("tr");
   
   if (targetRow) {
     var values = [];
@@ -86,6 +84,7 @@ function clearPost() {
 function closePost() {
   // 버튼, readOnly 초기화
   enterX();
+
   // 팝업 감추기
   document.getElementById("post").style.display = "none";
 
@@ -95,15 +94,14 @@ function closePost() {
   document.getElementById("postTable").style.display = "block";
 }
 
-// Delete 버튼이 클릭될 때 실행되는 함수
+/* Delete 버튼이 클릭될 때 실행되는 함수 */ 
 function deleteRow() {
-  // id와 일치하는 객체를 찾아서 삭제
-  
   // id가 "id"인 input 요소의 값을 가져와서 postId 변수에 담기
   var postId = document.getElementById("id").value;
-  console.log("postId: ",postId);
-
+  console.log("postId: ", postId);
+  
   data = data.filter(function(item) {
+    // id와 일치하는 객체를 찾아서 삭제
     return String(item.id) !== postId;
   });
 
@@ -112,7 +110,7 @@ function deleteRow() {
   createTable(data);
 }
 
-// update 버튼 함수
+/* update 버튼 함수 */ 
 function updateRow() {
   var postInputs = document.getElementsByClassName("postInput");
 
@@ -126,10 +124,9 @@ function updateRow() {
   document.getElementById("delete").style.display = "none";
   document.getElementById("update").style.display = "none";
   document.getElementById("enter").style.display = "inline";
-
 }
 
-// 수정 버튼
+/* 수정 버튼 */ 
 function enterRow() {
   
   // 가정: 현재 HTML에서 어떤 방식으로든 id 값을 가져왔다고 가정
@@ -143,9 +140,12 @@ function enterRow() {
 
   if (targetObject) {
     var newTitleInput = document.getElementById("title").value; // 새로운 title 값
-
+    var newCompletedInput = document.getElementById("completed").value; // 새로운 completed 값
     // 찾은 객체의 title 값을 새로운 값으로 변경
     targetObject.title = newTitleInput;
+
+    // 찾은 객체의 title 값을 새로운 값으로 변경
+    targetObject.completed = newCompletedInput;
 
     // 변경된 data 출력
     console.log(data);
@@ -158,12 +158,14 @@ function enterRow() {
 
 }
 
-// 버튼, readOnly 초기화 함수
+/* 버튼, readOnly 초기화 함수 */ 
 function enterX() {
   // 버튼 원위치
   document.getElementById("delete").style.display = "inline";
   document.getElementById("update").style.display = "inline";
+  document.getElementById("create-btn").style.display = "inline";
   document.getElementById("enter").style.display = "none";
+  document.getElementById("create-post").style.display = "none";
 
   // readOnly 설정
   // 모든 요소에 대해 readOnly로 설정
@@ -172,4 +174,33 @@ function enterX() {
   for (var i = 0; i < postInputs.length; i++) {
     postInputs[i].readOnly = true;
   }
+}
+
+function createBtn() {
+  document.getElementById("postTable").style.display = "none";
+  document.getElementById("create-post").style.display = "block";
+  document.getElementById("create-btn").style.display = "none";
+}
+
+function createRow() {
+  document.getElementById("postTable").style.display = "none";
+  document.getElementById("create-post").style.display = "block";
+  document.getElementById("create-btn").style.display = "none";
+
+  // 새로운 객체 생성
+  var newObject = {
+    userId: document.getElementById("create-userId").value,
+    id: document.getElementById("create-id").value,
+    title: document.getElementById("create-title").value,
+    completed: document.getElementById("create-completed").value
+  };
+
+  // data 배열에 새로운 객체 추가
+  data.push(newObject);
+
+  // 테이블 업데이트
+  createTable(data);
+
+  // 팝업 닫기
+  closePost();
 }

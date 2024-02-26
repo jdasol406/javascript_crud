@@ -28,7 +28,24 @@ td {
   z-index: 9999;
 }
 
+#create-post{
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 740px;
+  background-color: #fff;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  z-index: 9999;
+}
+
 #post input {
+  text-align: center;
+}
+
+#create-post input {
   text-align: center;
 }
 
@@ -48,6 +65,22 @@ td {
   width: 50px;
 }
 
+#create-userId{
+  width: 20px;
+}
+
+#create-id{
+  width: 20px;
+}
+
+#create-title{
+  width: 475px;
+}
+
+#create-completed{
+  width: 50px;
+}
+
 #closeBtn {
   cursor: pointer;
   position: absolute;
@@ -58,3 +91,4 @@ td {
 #enter {
    display: none;
 }
+
