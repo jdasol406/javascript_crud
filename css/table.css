@@ -8,13 +8,6 @@ td {
   text-align: center;
 }
 
-/* .wrap {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  width: auto;
-} */
-
 #post {
   display: none;
   position: fixed;
@@ -54,7 +47,7 @@ td {
 }
 
 #id{
-  width: 20px;
+  width: 25px;
 }
 
 #title{
@@ -70,7 +63,7 @@ td {
 }
 
 #create-id{
-  width: 20px;
+  width: 25px;
 }
 
 #create-title{

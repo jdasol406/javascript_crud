@@ -5,7 +5,7 @@ var data = JSON.parse(JSON.stringify(book));
 function clearTable() {
   var tableBody = document.getElementById("tableBody");
 
-  tableBody.innerHTML = '';
+  tableBody.innerHTML = "";
 }
 
 /* json파일로 테이블을 만드는 함수 */
@@ -82,13 +82,10 @@ function clearPost() {
 
 /* 팝업 닫기 함수 */ 
 function closePost() {
-  // 버튼, readOnly 초기화
   enterX();
 
-  // 팝업 감추기
   document.getElementById("post").style.display = "none";
 
-  // 팝업 내용 초기화
   clearPost();
 
   document.getElementById("postTable").style.display = "block";
@@ -105,17 +102,14 @@ function deleteRow() {
     return String(item.id) !== postId;
   });
 
-  closePost();
-  // 테이블 업데이트
   createTable(data);
+    
+  closePost();
 }
 
 /* update 버튼 함수 */ 
 function updateRow() {
   var postInputs = document.getElementsByClassName("postInput");
-
-  var currentIdFromHTML = document.getElementById("id").value;
-  console.log("currentIdFromHTML: ",currentIdFromHTML);
 
   // readOnly 해제
   postInputs[2].readOnly = false;
@@ -128,14 +122,25 @@ function updateRow() {
 
 /* 수정 버튼 */ 
 function enterRow() {
+  // 입력 필드 값 가져오기
+  var userId = document.getElementById("userId").value;
+  var title = document.getElementById("title").value;
+  var completed = document.getElementById("completed").value;
+
+  // 입력 필드 중 하나라도 비어있으면 알림창 띄우기
+  if (userId === "" || title === "" || completed === "") {
+    alert("입력 필드를 모두 채워주세요.");
+
+    // 팝업 닫기
+    closePost();
+    return;
+  }
   
-  // 가정: 현재 HTML에서 어떤 방식으로든 id 값을 가져왔다고 가정
   var currentIdFromHTML = document.getElementById("id").value;
-  console.log("currentIdFromHTML: ",currentIdFromHTML);
 
   // data에서 id가 현재 HTML의 id 값과 일치하는 객체 찾기
   var targetObject = data.find(function(item) {
-    return item.id === parseInt(currentIdFromHTML);
+    return String(item.id) === currentIdFromHTML;
   });
 
   if (targetObject) {
@@ -153,9 +158,9 @@ function enterRow() {
     console.log("No matching object found.");
   }
 
-  closePost();
   createTable(data);
-
+    
+  closePost();
 }
 
 /* 버튼, readOnly 초기화 함수 */ 
@@ -176,16 +181,59 @@ function enterX() {
   }
 }
 
+/* create-btn 눌렀을 때 실행되는 함수 */
 function createBtn() {
   document.getElementById("postTable").style.display = "none";
   document.getElementById("create-post").style.display = "block";
   document.getElementById("create-btn").style.display = "none";
+
+  // 현재 데이터 배열에 있는 id 값 중 가장 큰 값
+  var maxId = 0;
+
+  // 데이터 배열이 비어있지 않은 경우 실행
+  if (data.length > 0) {
+    var currentIds = [];
+
+    // 데이터 배열(data)의 각 객체의 id 속성 값 추출
+    for (var i = 0; i < data.length; i++) {
+      currentIds.push(parseInt(data[i].id));
+    }
+
+    // currentIds 배열 중 가장 큰 값 찾아서 maxId에 할당
+    maxId = Math.max.apply(null, currentIds);
+  }
+
+  // 새로운 id 값
+  var newId = maxId + 1;
+
+  console.log("newID Type: ",typeof(newId));
+
+  document.getElementById("create-id").value = newId;
 }
 
+/* create input값 비우기 함수 */
+function createInputClear() {
+  document.getElementById("create-userId").value= "";
+  document.getElementById("create-title").value= "";
+  document.getElementById("create-completed").value= "";
+}
+
+/* 새로운 row 만드는 함수 */
 function createRow() {
-  document.getElementById("postTable").style.display = "none";
-  document.getElementById("create-post").style.display = "block";
-  document.getElementById("create-btn").style.display = "none";
+  // 입력 필드 값 가져오기
+  var userId = document.getElementById("create-userId").value;
+  var title = document.getElementById("create-title").value;
+  var completed = document.getElementById("create-completed").value;
+
+  // 입력 필드 중 하나라도 비어있으면 알림창 띄우기
+  if (userId === "" || title === "" || completed === "") {
+    alert("입력 필드를 모두 채워주세요.");
+    // input값 비우기
+    createInputClear();
+    // 팝업 닫기
+    closePost();
+    return;
+  }
 
   // 새로운 객체 생성
   var newObject = {
@@ -195,12 +243,13 @@ function createRow() {
     completed: document.getElementById("create-completed").value
   };
 
-  // data 배열에 새로운 객체 추가
-  data.push(newObject);
+    // data 배열에 새로운 객체 추가
+    data.push(newObject);
 
-  // 테이블 업데이트
-  createTable(data);
+    createTable(data);
 
-  // 팝업 닫기
-  closePost();
+    createInputClear(); 
+
+    closePost();
 }
+
