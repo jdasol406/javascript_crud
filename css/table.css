@@ -54,3 +54,7 @@ td {
   top: 10px;
   right: 10px;
 }
+
+#enter {
+   display: none;
+}
