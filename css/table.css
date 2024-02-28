@@ -85,3 +85,10 @@ td {
    display: none;
 }
 
+#th-id {
+  display: none;
+}
+
+.table-id {
+  display: none;
+}

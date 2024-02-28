@@ -10,12 +10,13 @@ function clearTable() {
 
 /* json파일로 테이블을 만드는 함수 */
 function createTable(data) {
+  console.log("create");
   //table을 비우고 새로 만들어야함
   clearTable();
 
   var tableBody = document.getElementById("tableBody");
 
-  data.forEach(function(item) {
+  data.reverse().forEach(function(item, index) {
     var row = tableBody.insertRow();
     
     var userIdCell = row.insertCell(0);
@@ -23,6 +24,7 @@ function createTable(data) {
     
     var idCell = row.insertCell(1);
     idCell.textContent = item.id;
+    idCell.classList.add('table-id'); 
     
     var titleCell = row.insertCell(2);
     titleCell.textContent = item.title;
@@ -30,7 +32,11 @@ function createTable(data) {
     var completedCell = row.insertCell(3);
     completedCell.textContent = item.completed;
 
+    var seqCell = row.insertCell(4);
+    seqCell.textContent = data.length - index;
   });
+
+  console.log("data",data);
 }
 
 createTable(data);
@@ -53,15 +59,18 @@ document.getElementById("tableBody").addEventListener("click", function(event) {
 
 /* 클릭된 tr의 값을 팝업에 표시하는 함수 */
 function showPost(values) {
+  document.getElementById("create-btn").style.display = "none";
   // 팝업 보이기
   document.getElementById("postTable").style.display = "none";
   document.getElementById("post").style.display = "block";
 
-  // values 배열의 각 요소를 input에 추가
+  // values 배열의 각 요소를 input에 추가 // 객체가 아니라 배열이라서 
   document.getElementById("userId").value = values[0];
   document.getElementById("id").value = values[1];
   document.getElementById("title").value = values[2];
   document.getElementById("completed").value = values[3];
+
+  console.log("test: ",values);
   
   var postInputs = document.getElementsByClassName("postInput");
 
@@ -115,6 +124,9 @@ function updateRow() {
   postInputs[2].readOnly = false;
   postInputs[3].readOnly = false;
 
+  // id 안보이게
+  document.getElementById("id").style.display = "none";
+
   document.getElementById("delete").style.display = "none";
   document.getElementById("update").style.display = "none";
   document.getElementById("enter").style.display = "inline";
@@ -131,6 +143,14 @@ function enterRow() {
   if (userId === "" || title === "" || completed === "") {
     alert("입력 필드를 모두 채워주세요.");
 
+    // 팝업 닫기
+    closePost();
+    return;
+  }
+
+  //userId가 숫자인지 아닌지를 알아보는 조건문
+  if(isNaN(userId)){
+    alert("userId에는 숫자만 들어갈 수 있습니다.");
     // 팝업 닫기
     closePost();
     return;
@@ -230,6 +250,14 @@ function createRow() {
     alert("입력 필드를 모두 채워주세요.");
     // input값 비우기
     createInputClear();
+    // 팝업 닫기
+    closePost();
+    return;
+  }
+
+  //userId가 숫자인지 아닌지를 알아보는 조건문
+  if(isNaN(userId)){
+    alert("userId에는 숫자만 들어갈 수 있습니다.");
     // 팝업 닫기
     closePost();
     return;
