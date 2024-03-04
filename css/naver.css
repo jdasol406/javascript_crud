@@ -45,7 +45,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 384px;
+  width: 370px;
   height: 52px;
   border: 1px solid #3fce5d;
   border-radius: 20px;
@@ -132,11 +132,19 @@ body {
 }
 
 #news1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 430px;
   margin-bottom: 10px;
   background-color: #fff;
 }
 
 #news2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 430px;
   margin-bottom: 10px;
   background-color: #fff;
 }
