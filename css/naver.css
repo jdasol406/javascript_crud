@@ -1,0 +1,142 @@
+*, *::after, *:before {
+  box-sizing: border-box;
+}
+
+body {
+  left: 0; 
+  top: 0; 
+  width: 100%; 
+  height: 100%;
+  background-color: #f4f6f8;
+  margin: 0px;
+}
+
+#wrap {
+  min-width: 320px;
+  max-width: 430px;
+  height: auto;
+}
+
+.header {
+  height: 130px;
+}
+
+#header-icon {
+  display: flex;
+  justify-content: space-between;
+}
+
+#header-icon img {
+  height: 50px;
+}
+
+#header-righticon {
+  margin: 1px 3px 0px 0px;
+}
+
+.search {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#search-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 384px;
+  height: 52px;
+  border: 1px solid #3fce5d;
+  border-radius: 20px;
+}
+
+#logo{
+  margin-left: 10px;
+  margin-top: 2px;
+}
+
+#circle{
+  margin-right: 10px;
+  margin-top: 3px;
+}
+
+#main-icon {
+  margin: 20px 0px 70px 0px;  
+}
+
+.main-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.special-da {
+  display: flex;
+  justify-content: center;
+  height: 120px;
+}
+
+.widget {
+  display: flex;
+  justify-content: space-evenly;
+  height: 88px;
+}
+
+#weather {
+  width: 203px;
+  height: 80px;
+  background-color: #fff;
+  border-radius: 10px;
+}
+
+#weather-icon{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#stock {
+  width: 203px;
+  height: 80px;
+  background-color: #fff;
+  border-radius: 10px;
+}
+
+#stock-icon{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.news-headline {
+  display: flex;
+  justify-content: space-evenly;
+  margin-bottom: 10px;
+}
+
+.news {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#news-headline {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  border-radius: 10px;
+  width: 410px;
+  height: 128px;
+}
+
+#news1 {
+  margin-bottom: 10px;
+  background-color: #fff;
+}
+
+#news2 {
+  margin-bottom: 10px;
+  background-color: #fff;
+}
